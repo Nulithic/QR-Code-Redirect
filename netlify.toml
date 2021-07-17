@@ -1,5 +1,18 @@
-# sample netlify.toml
 [build]
-  command = "yarn run build"
-  functions = "functions" # netlify dev uses this directory to scaffold and serve your functions
-  publish = "public"
+  functions = "functions"
+
+[build.environment]
+  GENERATE_SOURCEMAP = "true"
+
+[build.production.environment]
+  GENERATE_SOURCEMAP = "false"
+
+[[redirects]]
+ from = "/api/*"
+ to = "/.netlify/functions/:splat"
+ status = 200
+
+[[redirects]]
+ from = "/*"
+ to = "/index.html"
+ status = 200
